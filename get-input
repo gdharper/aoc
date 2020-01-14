@@ -1,0 +1,12 @@
+#! /bin/bash
+
+YEAR="$1"
+DAY="$2"
+
+if [ -z $YEAR ] || [ -z $DAY ]; then
+    echo "Please pass a year and day as args"
+    exit 1
+fi
+
+
+curl -b session=$(cat /home/greg/aoc/.session_id) https://adventofcode.com/${YEAR}/day/${DAY}/input > input

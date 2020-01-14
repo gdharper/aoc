@@ -1,0 +1,15 @@
+#! /bin/bash
+
+YEAR="2015"
+DAY="$1"
+
+mkdir -p "$1"
+
+../get-input $YEAR $DAY
+
+mv input "$1/input"
+
+touch "$1/$1.ml"
+
+printf "\nlet ic = open_in \"$1/input\"\n\nlet () = close_in ic\n\n" >> "$1/$1.ml"
+
