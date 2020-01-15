@@ -9,7 +9,17 @@ mkdir -p "$1"
 
 mv input "$1/input"
 
-touch "$1/$1.ml"
+ML_FILE="$1/$1.ml"
 
-printf "\nlet ic = open_in \"$1/input\"\n\nlet () = close_in ic\n\n" >> "$1/$1.ml"
+touch $ML_FILE
+
+printf "\n" >> $ML_FILE
+printf "let ic = open_in \"$1/input\"\n" >> $ML_FILE
+printf "\n" >> $ML_FILE
+printf "let rec rl acc ic = match input_line ic with | s -> rl (s::acc) ic | exception End_of_file -> acc\n" >> $ML_FILE
+printf "\n" >> $ML_FILE
+printf "\n" >> $ML_FILE
+printf "\n" >> $ML_FILE
+printf "let () = close_in ic\n" >> $ML_FILE
+printf "\n" >> $ML_FILE
 
