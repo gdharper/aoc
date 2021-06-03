@@ -31,19 +31,14 @@ with open('input') as f:
     print(f'Part 1: {possible_replacements(target, replacements)}')
     print()
 
-    reverse = [(r[1],r[0]) for r in replacements]
-
-    start = target
     i = 0
     while True:
         i += 1
         poss = set({})
-        for pattern, replacement in reverse:
+        for r in replacements:
             idx = -1
-            while (idx := start.find(pattern,idx+1)) != -1:
-                new = start[:idx] + replacement + start[idx+len(pattern):]
-                if new == "e":
-                    raise Exception('Part 2: ' + str(i))
-                poss.add(new)
-        start = sorted(poss, key=len)[0] # for me, simply grabbing the shortest result worked - this might not always be the case
+            while (idx := target.find(r[1],idx+1)) != -1:
+                if target.replace(r[1],r[0],1) == 'e': raise Exception('Part 2: ' + str(i))
+                poss.add(target.replace(r[1], r[0], 1))
+        target = sorted(poss, key=len)[0] # for me, simply grabbing the shortest result worked - this might not always be the case
 
